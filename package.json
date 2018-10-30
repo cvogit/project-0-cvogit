@@ -1,0 +1,22 @@
+{
+  "name": "project-0-cvogit",
+  "version": "1.0.0",
+  "description": "Web application project 0",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1810-java-blake/project-0-cvogit.git"
+  },
+  "author": "Calvin Vo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1810-java-blake/project-0-cvogit/issues"
+  },
+  "homepage": "https://github.com/1810-java-blake/project-0-cvogit#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

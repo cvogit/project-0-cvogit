@@ -8,6 +8,9 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+### VisualStudioCode ###
+node_modules
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
