@@ -49,6 +49,10 @@ socket.on('game-inprogress', function(data) {
   let joinBtn = document.getElementById('join-game');
   joinBtn.innerHTML = 'Inprogress';
   joinPermission = false;
+
+  // change music
+  // let audio = document.getElementById('main-audio');
+  // audio.src = '/static/audio/music_2.mp';
 });
 
 /**
