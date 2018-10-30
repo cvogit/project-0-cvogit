@@ -4,7 +4,7 @@
   "description": "Web application project 0",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/1810-java-blake/project-0-cvogit#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "socket.io": "^2.1.1"
+  },
+  "devDependencies": {
   }
 }
