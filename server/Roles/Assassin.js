@@ -5,6 +5,7 @@ class Assassin extends Role {
   constructor(){
     super('assassin');
     this.target = '';
+    this.enterMessage = 'You are the assassin, persuate others and lead your taret to their demise.';    
   }
 
   /**

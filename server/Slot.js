@@ -9,6 +9,7 @@ class Slot {
     this.socketId   = null;
     this.voteFor    = null;
     this.isConnected  = true;
+    this.enterMessage = 'Default Message';
   }
 
 }

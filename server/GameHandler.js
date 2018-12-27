@@ -239,6 +239,16 @@ class GameHandler {
   }
 
   /**
+   * Reveal all the roles
+   */
+  revealAllRoles() {
+    let gameRoom = this.gameRoom;
+    let rolesArray = [gameRoom.slot_1.role.name, gameRoom.slot_2.role.name, gameRoom.slot_3.role.name, gameRoom.slot_4.role.name, gameRoom.slot_5.role.name];
+
+    this.io.sockets.emit('reveal-roles', rolesArray);
+  }
+
+  /**
   * Start the game
   *
   * @param socket 
@@ -247,9 +257,23 @@ class GameHandler {
 
     // Flip game room on
     this.gameRoom.status = 'inprogress';
-    this.io.sockets.emit('game-message-update', 'Game is starting');
     this.io.sockets.emit('game-starting');
 
+    setTimeout(() => { 
+      this.io.sockets.emit('game-message-update', 'Game is starting in 4');
+    }, 1000);
+
+    setTimeout(() => { 
+      this.io.sockets.emit('game-message-update', 'Game is starting in 3');
+    }, 2000);
+
+    setTimeout(() => { 
+      this.io.sockets.emit('game-message-update', 'Game is starting in 2');
+    }, 3000);
+
+    setTimeout(() => { 
+      this.io.sockets.emit('game-message-update', 'Game is starting in 1');
+    }, 4000);
 
     // Possible game set of roles
     const roles = [['werewolf', 'werewolf', 'assassin', 'seer', 'villager']];
@@ -259,39 +283,53 @@ class GameHandler {
     chosenRoles = this.shuffle(chosenRoles);
     this.assignRoles(chosenRoles);
 
-    // Give each players their roles
-    this.updateGameInitialState();
-
     let gameRoom = this.gameRoom;
     let slotArray = [gameRoom.slot_1, gameRoom.slot_2, gameRoom.slot_3, gameRoom.slot_4, gameRoom.slot_5];
 
+    setTimeout(() => { 
+      // Give each players their roles
+      this.updateGameInitialState();
+    }, 5000);
+
     // Wait 5 seconds then perform night events
-    setTimeout(function() { 
+    setTimeout(() => { 
       slotArray.forEach(slot => {
         if(slot.isConnected)
           slot.role.performNightEvent(gameRoom, slot);
       });
-    }, 5000);
-
-    // Wait 5 (+5 secs) seconds and allow chat
-    setTimeout(() => { 
-      this.gameRoom.chatPermission = true;
-      this.io.sockets.emit('game-message-update', 'Talk among each other and find the werewolves');
     }, 10000);
 
-    // Wait 1 mins (+10 secs) then start vote
+    // Wait 5 (+10 secs) seconds and allow chat
+    setTimeout(() => { 
+      this.gameRoom.chatPermission = true;
+      this.io.sockets.emit('game-message-update', 'Talk among each other and find the werewolves: 60');
+      
+      for(let i = 1; i < 60; i ++) {
+        setTimeout(() => { 
+          this.io.sockets.emit('game-message-update', 'Talk among each other and find the werewolves: ' + (60 - i));
+        }, i * 1000);
+      }
+    }, 15000);
+
+    // Wait 1 mins (+15 secs) then start vote
     setTimeout(() => { 
       this.gameRoom.votePermission = true;
       this.io.sockets.emit('allow-vote');
-      this.io.sockets.emit('game-message-update', 'Vote for a town victim');
-    }, 130000); // 70000
+      this.io.sockets.emit('game-message-update', 'Vote for a town victim: 30');
 
-    // Wait 30 seconds (+1:10 mins) then tally votes
+      for(let i = 1; i < 30; i ++) {
+        setTimeout(() => { 
+          this.io.sockets.emit('game-message-update', 'Vote for a town victim: ' + (30 - i));
+        }, i * 1000);
+      }
+    }, 75000); // 75000
+
+    // Wait 30 seconds (+1:15 mins) then tally votes
     setTimeout(() => { 
       this.io.sockets.emit('game-message-update', 'No more voting');
       this.gameRoom.votePermission = false;
       this.io.sockets.emit('endVote');
-    }, 100000); // 100000
+    }, 105000); // 105000
 
     // Announce result in 5 secs after vote ends (+1:40)
     setTimeout(() => { 
@@ -300,13 +338,14 @@ class GameHandler {
         if(slot.isConnected)
           slot.role.isVictorious(gameRoom, slot);
       });
-    }, 105000); // 105000
+      this.revealAllRoles();
+    }, 110000); // 110000
 
     // Reset the game state
     setTimeout(() => { 
       this.io.sockets.emit('game-reset');
       this.restartGameQueue();
-    }, 115000);
+    }, 120000);
   }
 
   /**
@@ -319,7 +358,7 @@ class GameHandler {
 
     slotArray.forEach(slot => {
       if(slot.isConnected) 
-        slot.socket.emit('assigned-role', slot.role.name);
+        slot.socket.emit('assigned-role', slot.role.name, slot.role.enterMessage);
     });
   }
 

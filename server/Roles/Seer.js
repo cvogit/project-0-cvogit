@@ -4,6 +4,7 @@ let Role = require('./Role');
 class Seer extends Role {
   constructor(){
     super('seer');
+    this.enterMessage = 'You are the seer, use your knowledge and lead the town to safety.';    
   }
 
   /**

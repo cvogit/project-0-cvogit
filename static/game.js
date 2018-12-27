@@ -74,9 +74,11 @@ socket.on('game-message-update', function(data) {
 /**
  * Assigned a role from the server
  */
-socket.on('assigned-role', function(data) {
+socket.on('assigned-role', function(data, message) {
   let userSlotImage = document.getElementById('player-' + selfSlot + '-img');
   userSlotImage.src = "/static/images/" + data + ".png";
+  let gameMessage = document.getElementById('game-message');
+  gameMessage.innerHTML = message;
 });
 
 /**
@@ -161,6 +163,18 @@ socket.on('game-chat-update', function(data) {
 socket.on('player-voted-for', function(voter, target) {
   let userOverlay = document.getElementById('player-' + voter + '-overlay');
   userOverlay.innerHTML = target;
+});
+
+/**
+* Revealed all roles
+*/
+socket.on('reveal-roles', function(rolesArray) {
+  let index = 1;
+  rolesArray.forEach(role => {
+    let userSlotImage = document.getElementById('player-' + index + '-img');
+    userSlotImage.src = "/static/images/" + role + ".png";
+    index++;
+  });
 });
 
 /**

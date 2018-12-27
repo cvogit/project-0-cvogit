@@ -4,7 +4,8 @@
   "description": "Web application project 0",
   "main": "index.js",
   "scripts": {
-    "test": "node server.js"
+    "test": "node server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

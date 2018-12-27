@@ -4,6 +4,7 @@ let Role = require('./Role');
 class Werewolf extends Role {
   constructor(){
     super('werewolf');
+    this.enterMessage = 'You are a werewolf, project your pack to ensure victory.';    
   }
 
   /**
