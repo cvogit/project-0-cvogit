@@ -1,6 +1,4 @@
-# Project 0
-
-# One night werewolf online
+## Project 0 - One night werewolf mini
 
 - A simple rebuild of the table top game, one night werewolf using React and Node server
 - Up to 5 players can join the room at a time
