@@ -13,4 +13,4 @@ A simple rebuild of the table top game, one night werewolf, using React and Node
 
 ## Environment / Technologies
 
-JavaScript, HTML, CSS, AJAX, SQL, Java, Spring, DevOps, React, Material-ui, Postman, Amazon CodeBuild, Amazon Pipeline, Spring MVC, Spring AOP, Spring Data.
+JavaScript, HTML, CSS, AJAX, Express.js, Socket.io
