@@ -1,0 +1,1 @@
+This is an Express Js server. It tracks multiple client connecting to the server and allows up to 5 players to join the game room when it is open. Using Socket io, the server handle all of the game logic including assigning roles to each players and having a chat box.
